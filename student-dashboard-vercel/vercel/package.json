@@ -1,0 +1,25 @@
+{
+  "name": "student-dashboard-vercel",
+  "version": "2.0.0",
+  "description": "Student management dashboard - Node.js (Express) + PostgreSQL, ready for Vercel",
+  "main": "app.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "db:init": "node scripts/init-db.js",
+    "admin:create": "node scripts/create-admin.js",
+    "db:migrate-from-mysql": "node scripts/migrate-from-mysql.js",
+    "test": "node --test test/session.test.js",
+    "smoke": "node scripts/smoke-test.js"
+  },
+  "engines": { "node": ">=18" },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "pg": "^8.11.5"
+  },
+  "devDependencies": {
+    "mysql2": "^3.9.7"
+  }
+}

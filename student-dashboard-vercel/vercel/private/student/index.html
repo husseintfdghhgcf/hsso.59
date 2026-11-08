@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم إدارة وتقييم الطلاب</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../assets/js/tailwind-config.js"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Arabic Font: Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 min-h-screen transition-colors duration-200">
+
+    <div class="flex flex-col min-h-screen">
+
+        <!-- Top Header Navigation -->
+        <header class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 sticky top-0 z-30">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <!-- Logo & Title -->
+                    <div class="flex items-center space-x-3 space-x-reverse">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white shadow-lg shadow-blue-500/30">
+                            <i class="fa-solid fa-graduation-cap text-xl"></i>
+                        </div>
+                        <div>
+                            <h1 class="font-bold text-lg leading-tight text-gray-900 dark:text-white">منصة النخبة التعليمية</h1>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">لوحة تقييم ومتابعة الطلاب</p>
+                        </div>
+                    </div>
+
+                    <!-- Header Controls (Theme Toggle & Add Student Quick Trigger) -->
+                    <div class="flex items-center space-x-3 space-x-reverse">
+                        <!-- Theme Toggle Button -->
+                        <button id="themeToggleBtn" onclick="toggleDarkMode()" class="p-2.5 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl transition-all" title="تبديل الوضع">
+                            <i id="themeIcon" class="fa-solid fa-moon text-lg"></i>
+                        </button>
+
+                        <!-- Logout -->
+                        <button type="button" onclick="logout()" class="p-2.5 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl transition-all" title="تسجيل الخروج">
+                            <i class="fa-solid fa-right-from-bracket text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Wrapper -->
+        <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+            <!-- Stats Overview Cards -->
+            <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <!-- Total Students Card -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl p-5 border border-gray-100 dark:border-gray-700/60 shadow-sm flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-medium text-gray-500 dark:text-gray-400">إجمالي الطلاب</p>
+                        <h3 id="statTotalStudents" class="text-2xl font-extrabold mt-1 text-gray-900 dark:text-white">0</h3>
+                        <span class="text-xs text-emerald-500 font-medium flex items-center gap-1 mt-1">
+                            <i class="fa-solid fa-users text-[10px]"></i> مسجلين بالحساب
+                        </span>
+                    </div>
+                    <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-2xl flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-user-graduate"></i>
+                    </div>
+                </div>
+
+                <!-- Rating Average Card -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl p-5 border border-gray-100 dark:border-gray-700/60 shadow-sm flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-medium text-gray-500 dark:text-gray-400">متوسط التقييم العام</p>
+                        <h3 id="statAvgRating" class="text-2xl font-extrabold mt-1 text-gray-900 dark:text-white">0%</h3>
+                        <span class="text-xs text-amber-500 font-medium flex items-center gap-1 mt-1">
+                            <i class="fa-solid fa-star text-[10px]"></i> بناءً على الأداء
+                        </span>
+                    </div>
+                    <div class="w-12 h-12 bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 rounded-2xl flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                </div>
+
+                <!-- Total Groups Card -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl p-5 border border-gray-100 dark:border-gray-700/60 shadow-sm flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-medium text-gray-500 dark:text-gray-400">عدد المجموعات النشطة</p>
+                        <h3 id="statTotalGroups" class="text-2xl font-extrabold mt-1 text-gray-900 dark:text-white">0</h3>
+                        <span class="text-xs text-purple-500 font-medium flex items-center gap-1 mt-1">
+                            <i class="fa-solid fa-layer-group text-[10px]"></i> شعب دراسية
+                        </span>
+                    </div>
+                    <div class="w-12 h-12 bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-2xl flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-people-group"></i>
+                    </div>
+                </div>
+
+                <!-- Top Student Card -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl p-5 border border-gray-100 dark:border-gray-700/60 shadow-sm flex items-center justify-between">
+                    <div class="truncate max-w-[150px]">
+                        <p class="text-xs font-medium text-gray-500 dark:text-gray-400">ترتيبي العام</p>
+                        <h3 id="statTopStudent" class="text-base font-bold mt-1 text-gray-900 dark:text-white truncate">--</h3>
+                        <span id="statTopScore" class="text-xs text-yellow-600 dark:text-yellow-400 font-semibold flex items-center gap-1 mt-1">
+                            <i class="fa-solid fa-trophy text-[10px]"></i> 0 نقطة
+                        </span>
+                    </div>
+                    <div class="w-12 h-12 bg-yellow-50 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400 rounded-2xl flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-crown"></i>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Leaderboard Podium Section (Top 3) -->
+            <section class="bg-gradient-to-b from-blue-900 to-indigo-950 rounded-3xl p-6 sm:p-8 text-white shadow-xl relative overflow-hidden">
+                <!-- Background decorative elements -->
+                <div class="absolute -left-10 -bottom-10 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl"></div>
+                <div class="absolute -right-10 -top-10 w-40 h-40 bg-indigo-500/10 rounded-full blur-3xl"></div>
+
+                <div class="text-center max-w-xl mx-auto mb-8">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-amber-500/20 text-amber-300 border border-amber-500/30 mb-2">
+                        <i class="fa-solid fa-award"></i> لوحة الأبطال
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold">مركزي بين الطلاب</h2>
+                    <p class="text-blue-200 text-xs sm:text-sm mt-1">ترتيبك الحالي بناءً على التقييمات النقاطية</p>
+                </div>
+
+                <!-- Podium Layout -->
+                <div id="podiumContainer" class="flex flex-col sm:flex-row justify-center items-end gap-4 sm:gap-6 pt-4 max-w-3xl mx-auto">
+                    <!-- Podium items dynamically rendered via Javascript -->
+                </div>
+            </section>
+
+            <!-- Filters, Search & Action Controls Bar -->
+            <section class="bg-white dark:bg-gray-800 rounded-2xl p-4 sm:p-5 border border-gray-100 dark:border-gray-700/60 shadow-sm space-y-4">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    
+                    <!-- Search Field -->
+                    <div class="relative flex-grow max-w-md">
+                        <i class="fa-solid fa-magnifying-glass absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input type="text" id="searchInput" oninput="handleFilterAndSearch()" placeholder="ابحث باسم الطالب أو رقم المعرف (ID)..." 
+                               class="w-full pr-10 pl-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
+                    </div>
+
+                    <!-- Filters and Sorting Row -->
+                    <div class="flex flex-wrap items-center gap-3">
+                        <!-- Group Filter -->
+                        <div class="flex items-center gap-2">
+                            <label class="text-xs text-gray-500 dark:text-gray-400 font-medium whitespace-nowrap"><i class="fa-solid fa-filter"></i> المجموعة:</label>
+                            <select id="groupFilter" onchange="handleFilterAndSearch()" class="py-2 px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="ALL">جميع المجموعات</option>
+                                <!-- Group options dynamically generated -->
+                            </select>
+                        </div>
+
+                        <!-- Sort By Option -->
+                        <div class="flex items-center gap-2">
+                            <label class="text-xs text-gray-500 dark:text-gray-400 font-medium whitespace-nowrap"><i class="fa-solid fa-arrow-down-wide-short"></i> الترتيب:</label>
+                            <select id="sortBySelect" onchange="handleFilterAndSearch()" class="py-2 px-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="scoreDesc">الأعلى تقييماً</option>
+                                <option value="scoreAsc">الأقل تقييماً</option>
+                                <option value="nameAsc">الاسم (أ-ي)</option>
+                                <option value="idAsc">رقم المعرف</option>
+                            </select>
+                        </div>
+
+                        </div>
+                </div>
+            </section>
+
+            <!-- Students List Table Section -->
+            <section class="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700/60 shadow-sm overflow-hidden">
+                <div class="px-6 py-4 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center">
+                    <h3 class="font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                        <i class="fa-solid fa-list-check text-blue-500"></i>
+                        قائمة الطلاب والتنقيط
+                    </h3>
+                    <span id="studentCounterBadge" class="text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-50 text-blue-600 dark:bg-blue-900/40 dark:text-blue-300">
+                        عرض 0 من 0
+                    </span>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-right text-sm">
+                        <thead class="bg-gray-50/70 dark:bg-gray-900/50 text-gray-500 dark:text-gray-400 font-semibold border-b border-gray-100 dark:border-gray-700/80">
+                            <tr>
+                                <th class="py-3.5 px-4 text-center">الترتيب</th>
+                                <th class="py-3.5 px-4">الطالب</th>
+                                <th class="py-3.5 px-4">المجموعة / الشعبة</th>
+                                <th class="py-3.5 px-4">التقييم والنقاط</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentsTableBody" class="divide-y divide-gray-100 dark:divide-gray-700/60 text-gray-700 dark:text-gray-200">
+                            <!-- Table Rows rendered dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Empty State Message -->
+                <div id="emptyState" class="hidden py-12 text-center">
+                    <div class="w-16 h-16 bg-gray-100 dark:bg-gray-700 text-gray-400 rounded-full flex items-center justify-center mx-auto mb-3 text-2xl">
+                        <i class="fa-solid fa-user-slash"></i>
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 font-medium">لم يتم العثور على أي طلاب مطابقين للشروط.</p>
+                    <button onclick="resetFilters()" class="mt-3 text-xs text-blue-600 dark:text-blue-400 font-bold hover:underline">إعادة ضبط التصفية</button>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-4 mt-auto">
+            <div class="max-w-7xl mx-auto px-4 text-center text-xs text-gray-500 dark:text-gray-400">
+                لوحة تحكم تقييم وإدارة الطلاب &copy; 2026 - جميع الحقوق محفوظة
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- ================= MODALS ================= -->
+
+    <!-- Notification Toast Box -->
+    <div id="toastNotification" class="fixed bottom-5 left-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-gray-900 text-white dark:bg-white dark:text-gray-900 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 border border-gray-700 dark:border-gray-200">
+        <div id="toastIcon" class="text-emerald-400 text-lg"><i class="fa-solid fa-circle-check"></i></div>
+        <p id="toastMessage" class="text-xs font-semibold">تمت العملية بنجاح</p>
+    </div>
+
+
+    <!-- ================= JAVASCRIPT LOGIC ================= -->
+    <script src="../assets/js/common.js"></script>
+    <script src="../assets/js/student.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة النخبة التعليمية</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="assets/js/tailwind-config.js"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Arabic Font: Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 min-h-screen transition-colors duration-200">
+<div class="min-h-screen flex flex-col">
+    <div class="absolute top-4 left-4"><button id="themeToggleBtn" type="button" onclick="toggleDarkMode()" class="p-2.5 text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl transition-all" title="تبديل الوضع"><i id="themeIcon" class="fa-solid fa-moon text-lg"></i></button></div>
+    <main class="flex-grow flex items-center justify-center p-4">
+        <div class="w-full max-w-md space-y-4">
+            <div class="flex justify-center mb-2"><div class="flex items-center space-x-3 space-x-reverse">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white shadow-lg shadow-blue-500/30"><i class="fa-solid fa-graduation-cap text-xl"></i></div>
+                        <div><h1 class="font-bold text-lg leading-tight text-gray-900 dark:text-white">منصة النخبة التعليمية</h1><p class="text-xs text-gray-500 dark:text-gray-400">لوحة تقييم ومتابعة الطلاب</p></div>
+                    </div></div>
+            <a href="student/login.html" class="flex items-center justify-between bg-white dark:bg-gray-800 rounded-2xl p-5 border border-gray-100 dark:border-gray-700/60 shadow-sm hover:scale-[1.02] transition-all">
+                <div>
+                    <h3 class="font-extrabold text-gray-900 dark:text-white">بوابة الطلاب</h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">عرض ملفك ومجموعتك وتقييمك وترتيبك</p>
+                </div>
+                <div class="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-2xl flex items-center justify-center text-xl"><i class="fa-solid fa-user-graduate"></i></div>
+            </a>
+            <a href="admin/login.html" class="flex items-center justify-between bg-white dark:bg-gray-800 rounded-2xl p-5 border border-gray-100 dark:border-gray-700/60 shadow-sm hover:scale-[1.02] transition-all">
+                <div>
+                    <h3 class="font-extrabold text-gray-900 dark:text-white">بوابة المشرفين</h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">إدارة الطلاب والمجموعات والتقييمات</p>
+                </div>
+                <div class="w-12 h-12 bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-2xl flex items-center justify-center text-xl"><i class="fa-solid fa-user-shield"></i></div>
+            </a>
+        </div>
+    </main>
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-4 mt-auto">
+            <div class="max-w-7xl mx-auto px-4 text-center text-xs text-gray-500 dark:text-gray-400">لوحة تحكم تقييم وإدارة الطلاب &copy; 2026 - جميع الحقوق محفوظة</div>
+        </footer>
+</div>
+<script src="assets/js/common.js"></script>
+<script src="assets/js/landing.js"></script>
+</body>
+</html>
